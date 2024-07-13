@@ -1,10 +1,36 @@
 package internal
 
-func Run() {
-	// Get some input
-	//Merge()
+import (
+	"fmt"
+	"os"
+	"strings"
+)
 
-	// Output the results of Merge
+func Run() {
+	if len(os.Args) != 3 {
+		fmt.Printf("Unexpected number of args. Expected %d, but received %d\n", 3, len(os.Args))
+		fmt.Println("./app 1,2,3 7,8,9")
+		os.Exit(1)
+	}
+
+	nums1Str := strings.Split(os.Args[1], ",")
+	nums2Str := strings.Split(os.Args[2], ",")
+
+	nums1, err := StringSliceToIntSlice(nums1Str, len(nums1Str)+len(nums2Str))
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	nums2, err := StringSliceToIntSlice(nums2Str, len(nums2Str))
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	Merge(nums1, len(nums1Str), nums2, len(nums2Str))
+
+	fmt.Printf("Output: %v\n", nums1)
 }
 
 func Merge(nums1 []int, m int, nums2 []int, n int) {
