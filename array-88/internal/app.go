@@ -4,7 +4,7 @@ func Run() {
 
 }
 
-func Merge(nums1 []int, m int, nums []int, n int) {
+func Merge(nums1 []int, m int, nums2 []int, n int) {
 	// Store it all in nums1
 	// nums1 has m + n length
 	// Sorted in non-decreasing order
