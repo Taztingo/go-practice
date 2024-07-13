@@ -16,6 +16,15 @@ func Run() {
 	nums1Str := strings.Split(os.Args[1], ",")
 	nums2Str := strings.Split(os.Args[2], ",")
 
+	if nums1Str[0] == "" {
+		nums1Str = []string{}
+	}
+	if nums2Str[0] == "" {
+		nums2Str = []string{}
+	}
+
+	fmt.Printf("num1str=%v\n", nums1Str)
+
 	nums1, err := StringSliceToIntSlice(nums1Str, len(nums1Str)+len(nums2Str))
 	if err != nil {
 		fmt.Println(err)
