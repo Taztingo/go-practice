@@ -32,8 +32,8 @@ Constraints:
 - 0 <= val <= 100
 
 ## Summary
-This project is a complete implementation of leetcode's remove element problem. The application takes in an array and a value to remove from the array. An array will be returned with all instances of value
-removed from it, and the number of elements remaining in the holed array.
+This project is a complete implementation of leetcode's remove element problem. The application takes in an array and a value to remove from the array. An array will be modified with all instances of value
+removed from it, and the function will return the number of remaining elements in the holed array.
 
 ## URL
 https://leetcode.com/problems/remove-element
