@@ -54,7 +54,7 @@ func TestMerge(t *testing.T) {
 			m:        2,
 			nums2:    []int{2},
 			n:        1,
-			expected: []int{},
+			expected: []int{1, 2, 3},
 		},
 		{
 			name:     "nums 2 has multiple elements",
@@ -79,6 +79,14 @@ func TestMerge(t *testing.T) {
 			nums2:    []int{1, 2, 3},
 			n:        3,
 			expected: []int{1, 1, 1, 2, 3},
+		},
+		{
+			name:     "real 0s are handled",
+			nums1:    []int{0, 0, 0, 0, 0},
+			m:        2,
+			nums2:    []int{1, 2, 3},
+			n:        3,
+			expected: []int{0, 0, 1, 2, 3},
 		},
 	}
 
