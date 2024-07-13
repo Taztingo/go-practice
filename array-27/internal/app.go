@@ -1,41 +1,40 @@
 package internal
 
+import (
+	"fmt"
+	"os"
+	"strconv"
+	"strings"
+)
+
 func Run() {
-	/*
-		if len(os.Args) != 3 {
-			fmt.Printf("Unexpected number of args. Expected %d, but received %d\n", 3, len(os.Args))
-			fmt.Println("./app 1,2,3 7,8,9")
-			os.Exit(1)
-		}
+	if len(os.Args) != 3 {
+		fmt.Printf("Unexpected number of args. Expected %d, but received %d\n", 3, len(os.Args))
+		fmt.Println("./app 1,2,3 2")
+		os.Exit(1)
+	}
 
-		nums1Str := strings.Split(os.Args[1], ",")
-		nums2Str := strings.Split(os.Args[2], ",")
+	numsStr := strings.Split(os.Args[1], ",")
 
-		if nums1Str[0] == "" {
-			nums1Str = []string{}
-		}
-		if nums2Str[0] == "" {
-			nums2Str = []string{}
-		}
+	if numsStr[0] == "" {
+		numsStr = []string{}
+	}
 
-		fmt.Printf("num1str=%v\n", nums1Str)
+	nums, err := StringSliceToIntSlice(numsStr, len(numsStr))
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 
-		nums1, err := StringSliceToIntSlice(nums1Str, len(nums1Str)+len(nums2Str))
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
+	val, err := strconv.Atoi(os.Args[2])
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 
-		nums2, err := StringSliceToIntSlice(nums2Str, len(nums2Str))
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
+	length := RemoveElement(nums, val)
 
-		Merge(nums1, len(nums1Str), nums2, len(nums2Str))
-
-		fmt.Printf("Output: %v\n", nums1)
-	*/
+	fmt.Printf("Output: length=%d nums=%v\n", length, nums)
 }
 
 func RemoveElement(nums []int, val int) int {

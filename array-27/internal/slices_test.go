@@ -34,6 +34,12 @@ func TestStringSliceToIntSlice(t *testing.T) {
 			expected: []int{12, 0},
 		},
 		{
+			name:     "multiple items",
+			str:      []string{"1", "12"},
+			cap:      2,
+			expected: []int{1, 12},
+		},
+		{
 			name: "no digit",
 			str:  []string{"abc"},
 			err:  "strconv.Atoi: parsing \"abc\": invalid syntax",
