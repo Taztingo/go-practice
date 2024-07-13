@@ -7,93 +7,56 @@ import (
 	"github.com/taztingo/go-practice/array-27/internal"
 )
 
-func TestMerge(t *testing.T) {
+func TestRemoveElement(t *testing.T) {
 	tests := []struct {
-		name     string
-		nums1    []int
-		m        int
-		nums2    []int
-		n        int
-		expected []int
+		name           string
+		nums           []int
+		val            int
+		expectedSlice  []int
+		expectedOutput int
 	}{
 		{
-			name:     "both arrays are empty",
-			nums1:    []int{},
-			m:        0,
-			nums2:    []int{},
-			n:        0,
-			expected: []int{},
+			name:           "nums is empty",
+			nums:           []int{},
+			val:            1,
+			expectedSlice:  []int{},
+			expectedOutput: 0,
 		},
 		{
-			name:     "nums1 is empty",
-			nums1:    []int{0},
-			m:        0,
-			nums2:    []int{1},
-			n:        1,
-			expected: []int{1},
+			name:           "val doesn't exist",
+			nums:           []int{1},
+			val:            2,
+			expectedSlice:  []int{1},
+			expectedOutput: 1,
 		},
 		{
-			name:     "nums2 is empty",
-			nums1:    []int{1},
-			m:        1,
-			nums2:    []int{},
-			n:        0,
-			expected: []int{1},
+			name:           "val removes one element",
+			nums:           []int{1},
+			val:            1,
+			expectedSlice:  []int{1},
+			expectedOutput: 0,
 		},
 		{
-			name:     "both contain 1 element",
-			nums1:    []int{1, 0},
-			m:        1,
-			nums2:    []int{2},
-			n:        1,
-			expected: []int{1, 2},
+			name:           "val removes multiple elements",
+			nums:           []int{1, 1},
+			val:            1,
+			expectedSlice:  []int{1, 1},
+			expectedOutput: 0,
 		},
 		{
-			name:     "nums 1 has multiple elements",
-			nums1:    []int{1, 3, 0},
-			m:        2,
-			nums2:    []int{2},
-			n:        1,
-			expected: []int{1, 2, 3},
-		},
-		{
-			name:     "nums 2 has multiple elements",
-			nums1:    []int{3, 0, 0},
-			m:        1,
-			nums2:    []int{1, 2},
-			n:        2,
-			expected: []int{1, 2, 3},
-		},
-		{
-			name:     "both have multiple elements",
-			nums1:    []int{1, 2, 0, 0},
-			m:        2,
-			nums2:    []int{3, 4},
-			n:        2,
-			expected: []int{1, 2, 3, 4},
-		},
-		{
-			name:     "duplicates are handled",
-			nums1:    []int{1, 1, 0, 0, 0},
-			m:        2,
-			nums2:    []int{1, 2, 3},
-			n:        3,
-			expected: []int{1, 1, 1, 2, 3},
-		},
-		{
-			name:     "real 0s are handled",
-			nums1:    []int{0, 0, 0, 0, 0},
-			m:        2,
-			nums2:    []int{1, 2, 3},
-			n:        3,
-			expected: []int{0, 0, 1, 2, 3},
+			name:           "val ignores other elements",
+			nums:           []int{1, 2, 1},
+			val:            1,
+			expectedSlice:  []int{2, 2, 1},
+			expectedOutput: 1,
 		},
 	}
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			internal.Merge(tc.nums1, tc.m, tc.nums2, tc.n)
-			assert.Equal(t, tc.expected, tc.nums1, "nums1 must contain the correct merged array")
+			remaining := internal.RemoveElement(tc.nums, tc.val)
+			assert.Equal(t, tc.expectedSlice, tc.nums, "nums must contain the correct updated array")
+			assert.Equal(t, tc.expectedOutput, remaining, "output must be number of elements that are not val")
 		})
 	}
 }
